@@ -1,5 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import DangerButton from "@/Components/DangerButton.vue";
+
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -50,6 +52,12 @@ defineProps({
                 <div>
                     <Link :href="route('users.edit', { user_id: user.id })">
                         <PrimaryButton class="my-2">Edit</PrimaryButton>
+                    </Link>
+                    <Link
+                        class="mx-2"
+                        :href="route('users.delete', { user_id: user.id })"
+                    >
+                        <DangerButton class="mx-1">Delete</DangerButton>
                     </Link>
                 </div>
             </div>

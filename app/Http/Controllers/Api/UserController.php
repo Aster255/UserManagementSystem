@@ -94,7 +94,9 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
+            $user->tokens()->delete();
             $user->delete();
+
             return $this->success(null, "Deleted successfully", 200);
         } catch (ModelNotFoundException $e) {
             return $this->error(null, 'User not found', 404);

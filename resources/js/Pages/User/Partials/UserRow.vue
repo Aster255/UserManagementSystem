@@ -1,7 +1,9 @@
 <script setup>
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 import { defineProps, ref } from "vue";
 import { Link } from "@inertiajs/vue3";
+
 const props = defineProps({
     user: {
         type: Object,
@@ -10,14 +12,6 @@ const props = defineProps({
         type: Object,
     },
 });
-
-// const isEditModalOpen = ref(false);
-// const UserModalNumber = ref(0);
-
-// const openEditModal = (id) => {
-//     UserModalNumber.value = id;
-//     isEditModalOpen.value = true;
-// };
 </script>
 
 <template>
@@ -52,6 +46,10 @@ const props = defineProps({
 
             <Link :href="route('users.edit', { user_id: user.id })">
                 <PrimaryButton class="mx-1">Edit</PrimaryButton>
+            </Link>
+
+            <Link :href="route('users.delete', { user_id: user.id })">
+                <DangerButton class="mx-1">Delete</DangerButton>
             </Link>
         </td>
     </tr>

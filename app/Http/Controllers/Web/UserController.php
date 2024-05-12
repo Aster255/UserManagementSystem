@@ -88,4 +88,24 @@ class UserController extends Controller
         }
         return $data;
     }
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        return Inertia::render('User/Delete', ['user' => $user]);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->tokens()->delete();
+
+        $user->delete();
+        return redirect(route('users.index'));
+    }
 }
