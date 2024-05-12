@@ -137,7 +137,7 @@ class UserController extends Controller
             }
         }
 
-        $response = [
+        $data = [
             'success' => [
                 'deleted_ids' => $deletedIds
             ],
@@ -146,7 +146,7 @@ class UserController extends Controller
             ]
         ];
 
-        return response()->json($response, 200);
+        return Inertia::render('User/DeletionStatus', ["data" => $data]);
     }
 
 }

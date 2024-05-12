@@ -23,9 +23,13 @@ const form = useForm({
     user_ids: [1],
 });
 
-const confirmUserDeletion = () => {
-    confirmingUserDeletion.value = true;
+const arrayInput = ref("");
 
+const confirmUserDeletion = () => {
+    const idsArray = arrayInput.value.split(",").map((item) => item.trim());
+    form.user_ids = idsArray;
+    console.log(form.user_ids);
+    confirmingUserDeletion.value = true;
     nextTick(() => passwordInput.value.focus());
 };
 
@@ -42,30 +46,28 @@ const closeModal = () => {
     confirmingUserDeletion.value = false;
     form.reset();
 };
-const numbers = ref([1, 2, 3]);
-const addForm = (index) => {
-    // Add a new form element when the user presses Enter in the last input field
-    if (index === form.user_ids.length - 1) {
-        form.user_ids.push("");
-    }
-};
 </script>
 
 <template>
     <section class="space-y-6">
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Delete Account</h2>
+            <h2 class="text-lg font-medium text-gray-900">
+                Delete User Accounts
+            </h2>
             <div>
-                <div v-for="(userId, index) in form.user_ids" :key="index">
-                    <input
-                        type="number"
-                        v-model="form.user_ids[index]"
-                        @keydown.enter="addForm(index)"
-                    />
-                </div>
+                <textarea
+                    v-model="arrayInput"
+                    id="arrayInput"
+                    rows="4"
+                    cols="50"
+                    placeholder="1, 2, 3, 4"
+                ></textarea
+                ><br />
             </div>
-
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="mt-1 text-sm text-grey-600">
+                Enter the user ID's of the accounts you want deleted
+            </p>
+            <p class="mt-1 text-sm text-red-600">
                 Once these accounts are deleted, login and api-tokens would also
                 be deleted. Please, take extra care before deleting any account.
             </p>
@@ -75,7 +77,9 @@ const addForm = (index) => {
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900"></h2>
+                <h2 class="text-lg font-medium text-gray-900">
+                    Mass Account Deletion
+                </h2>
                 <p class="mt-1 text-sm text-gray-600">
                     Once these accounts are deleted, login and api-tokens would
                     also be deleted. Please, take extra care before deleting any
