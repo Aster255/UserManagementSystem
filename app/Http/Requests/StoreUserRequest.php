@@ -24,7 +24,22 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'postal_code' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/\d{5}$|\d{4}$/', // Example for US phone numbers
+            ],
+            'phone_number' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^09\d{9}$|^9\d{9}$/', // Example for US phone numbers
+            ],
+            'username' => 'required|string|max:255|unique:' . User::class,
             'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
