@@ -1,5 +1,7 @@
 <script setup>
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { defineProps, ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 const props = defineProps({
     user: {
         type: Object,
@@ -50,21 +52,9 @@ const openUpdateModal = (id) => {
         <td
             class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex justify-center"
         >
-            <!-- <div class="flex gap-4">
-                <OrangeButton
-                    class="w-[70px] rounded-[15px] bg-orange-500 hover:bg-orange-700 p-3 text-sm text-white"
-                    @click="openEditModal(user.id)"
-                >
-                    Edit
-                </OrangeButton>
-                <OrangeButton
-                    class="w-[130px] rounded-[15px] bg-orange-500 hover:bg-orange-700 p-3 text-sm text-white"
-                    @click="openUpdateModal(user.id)"
-                >
-                    Update Status
-                </OrangeButton>
-            </div>
-        </td> -->
+            <Link :href="route('users.show', { user_id: user.id })">
+                <PrimaryButton class="my-2">Show</PrimaryButton>
+            </Link>
         </td>
     </tr>
 
