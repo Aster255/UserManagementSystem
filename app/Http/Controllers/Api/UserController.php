@@ -32,9 +32,14 @@ class UserController extends Controller
     {
         $request->validated($request->all());
         $user = User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address' => $request->address,
+            'postal_code' => $request->postal_code,
+            'phone_number' => $request->phone_number,
+            'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
         return new UserResource($user);
     }
