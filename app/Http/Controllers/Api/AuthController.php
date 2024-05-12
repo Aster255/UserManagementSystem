@@ -41,7 +41,6 @@ class AuthController extends Controller
     {
         $request->validated($request->all());
 
-        // dd($request->first_name);
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,

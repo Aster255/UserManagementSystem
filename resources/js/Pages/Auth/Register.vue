@@ -28,7 +28,6 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Register" />
-
         <form @submit.prevent="submit">
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />

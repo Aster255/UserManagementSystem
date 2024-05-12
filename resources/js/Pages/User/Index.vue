@@ -2,8 +2,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import UserRow from "./Partials/UserRow.vue";
 import Pagination from "@/Components/Pagination.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head } from "@inertiajs/vue3";
-
+import { Link } from "@inertiajs/vue3";
 defineProps({
     users: {
         type: Object,
@@ -21,8 +22,14 @@ defineProps({
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <Link :href="route('users.index')">
+                    <PrimaryButton class="my-2">Index</PrimaryButton>
+                </Link>
+                <Link :href="route('users.create')">
+                    <PrimaryButton class="my-2 mx-1">Create User</PrimaryButton>
+                </Link>
                 <table class="min-w-full leading-normal">
                     <thead>
                         <tr>

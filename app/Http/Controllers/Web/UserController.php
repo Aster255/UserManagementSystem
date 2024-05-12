@@ -25,5 +25,28 @@ class UserController extends Controller
         return Inertia::render('User/Index', ['users' => $users]);
     }
 
+    public function create()
+    {
+        return Inertia::render('User/Create');
+    }
+
+    public function store(StoreUserRequest $request)
+    {
+        $request->validated($request->all());
+
+        User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'address' => $request->address,
+            'postal_code' => $request->postal_code,
+            'phone_number' => $request->phone_number,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect(route('users.index'));
+    }
+
 
 }

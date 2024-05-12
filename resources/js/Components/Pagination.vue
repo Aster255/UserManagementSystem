@@ -12,7 +12,7 @@ const props = defineProps([
     "query",
 ]);
 
-const generateHref = (path, num, startDate, endDate) => {
+const generateHref = (path, num) => {
     let href = path || "";
 
     if (path && path.includes("?")) {
@@ -23,10 +23,6 @@ const generateHref = (path, num, startDate, endDate) => {
 
     if (num) {
         href += `page=${num}`;
-    }
-
-    if (startDate !== undefined && endDate !== undefined) {
-        href += `&start_date=${startDate}&end_date=${endDate}`;
     }
 
     const queryParam = new URLSearchParams(window.location.search).get("query");
@@ -103,7 +99,7 @@ const generateHref = (path, num, startDate, endDate) => {
                     </Link>
 
                     <Link
-                        :href="generateHref(path, 1, startDate, endDate, query)"
+                        :href="generateHref(path, 1, query)"
                         :class="
                             currentPage == 1
                                 ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
@@ -124,15 +120,7 @@ const generateHref = (path, num, startDate, endDate) => {
                     </div>
                     <Link
                         v-if="currentPage >= 3"
-                        :href="
-                            generateHref(
-                                path,
-                                currentPage - 1,
-                                startDate,
-                                endDate,
-                                query
-                            )
-                        "
+                        :href="generateHref(path, currentPage - 1, query)"
                         :class="
                             false
                                 ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
@@ -142,15 +130,7 @@ const generateHref = (path, num, startDate, endDate) => {
                     >
                     <Link
                         v-if="currentPage > 1 && last - currentPage > 0"
-                        :href="
-                            generateHref(
-                                path,
-                                currentPage,
-                                startDate,
-                                endDate,
-                                query
-                            )
-                        "
+                        :href="generateHref(path, currentPage, query)"
                         :class="
                             currentPage == currentPage
                                 ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
@@ -160,15 +140,7 @@ const generateHref = (path, num, startDate, endDate) => {
                     >
                     <Link
                         v-if="last - currentPage > 1"
-                        :href="
-                            generateHref(
-                                path,
-                                currentPage + 1,
-                                startDate,
-                                endDate,
-                                query
-                            )
-                        "
+                        :href="generateHref(path, currentPage + 1, query)"
                         :class="
                             false
                                 ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
@@ -188,9 +160,7 @@ const generateHref = (path, num, startDate, endDate) => {
                     </div>
                     <Link
                         v-if="last != 1"
-                        :href="
-                            generateHref(path, last, startDate, endDate, query)
-                        "
+                        :href="generateHref(path, last, query)"
                         :class="
                             currentPage == last
                                 ? 'relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
