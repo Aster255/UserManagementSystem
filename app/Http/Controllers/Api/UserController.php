@@ -115,6 +115,7 @@ class UserController extends Controller
         foreach ($userIds as $userId) {
             try {
                 $user = User::findOrFail($userId);
+                $user->tokens()->delete();
                 $user->delete();
                 $deletedIds[] = $userId;
             } catch (ModelNotFoundException $e) {

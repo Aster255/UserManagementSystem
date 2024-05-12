@@ -1,22 +1,17 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DeleteUserForm from "./Partials/DeleteUserForm.vue";
+import DeleteMultipleUserForm from "./Partials/DeleteMultipleUserForm.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import DangerButton from "@/Components/DangerButton.vue";
-defineProps({
-    user: {
-        type: Object,
-    },
-});
 </script>
 
 <template>
-    <Head :title="'User#' + user.id + '- Delete'" />
+    <Head title="DELETE-MULTIPLE-USERS" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                User#{{ user.id }}
+                DELETE MULTIPLE USERS
             </h2>
         </template>
 
@@ -34,7 +29,7 @@ defineProps({
                     >
                 </Link>
                 <div>
-                    <DeleteUserForm class="max-w-xl" :user="user" />
+                    <DeleteMultipleUserForm class="max-w-xl" targets="[]" />
                 </div>
             </div>
         </div>

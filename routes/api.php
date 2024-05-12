@@ -13,7 +13,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users', [UserController::class, 'store']);
     Route::get('/users/{user}', [UserController::class, 'show']);
     Route::patch('/users/{user}', [UserController::class, 'update']);
-    Route::delete('/users/delete-multiple', [UserController::class, 'destroyMultiple']);
+    Route::delete('/users/destroy-multiple', [UserController::class, 'destroyMultiple']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
 });
 

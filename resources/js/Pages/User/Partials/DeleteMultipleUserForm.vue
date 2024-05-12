@@ -7,6 +7,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import { nextTick, ref } from "vue";
+import TargetsInput from "./TargetsInput.vue";
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
@@ -19,6 +20,7 @@ defineProps({
 
 const form = useForm({
     password: "",
+    user_ids: [1],
 });
 
 const confirmUserDeletion = () => {
@@ -27,8 +29,8 @@ const confirmUserDeletion = () => {
     nextTick(() => passwordInput.value.focus());
 };
 
-const deleteUser = (user) => {
-    form.delete(route("users.destroy", user.id), {
+const deleteUser = () => {
+    form.post(route("users.destroyMultiple"), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => passwordInput.value.focus(),
@@ -40,16 +42,32 @@ const closeModal = () => {
     confirmingUserDeletion.value = false;
     form.reset();
 };
+const numbers = ref([1, 2, 3]);
+const addForm = (index) => {
+    // Add a new form element when the user presses Enter in the last input field
+    if (index === form.user_ids.length - 1) {
+        form.user_ids.push("");
+    }
+};
 </script>
 
 <template>
     <section class="space-y-6">
         <header>
             <h2 class="text-lg font-medium text-gray-900">Delete Account</h2>
+            <div>
+                <div v-for="(userId, index) in form.user_ids" :key="index">
+                    <input
+                        type="number"
+                        v-model="form.user_ids[index]"
+                        @keydown.enter="addForm(index)"
+                    />
+                </div>
+            </div>
 
             <p class="mt-1 text-sm text-gray-600">
-                Once this account is deleted, login and api-tokens would also be
-                deleted. Please, take extra care before deleting any account.
+                Once these accounts are deleted, login and api-tokens would also
+                be deleted. Please, take extra care before deleting any account.
             </p>
         </header>
 
@@ -57,12 +75,9 @@ const closeModal = () => {
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">
-                    Are you sure you want to delete User # {{ user.id }}
-                </h2>
-
+                <h2 class="text-lg font-medium text-gray-900"></h2>
                 <p class="mt-1 text-sm text-gray-600">
-                    Once this account is deleted, login and api-tokens would
+                    Once these accounts are deleted, login and api-tokens would
                     also be deleted. Please, take extra care before deleting any
                     account.
                 </p>

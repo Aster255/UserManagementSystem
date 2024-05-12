@@ -32,6 +32,11 @@ defineProps({
                 <Link :href="route('users.create')">
                     <PrimaryButton class="my-2 mx-1">Create User</PrimaryButton>
                 </Link>
+                <Link :href="route('users.deleteMultiple')">
+                    <DangerButton class="my-2 mx-1"
+                        >Delete-Multiple-Users</DangerButton
+                    >
+                </Link>
 
                 <div>
                     <div

@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
@@ -45,6 +46,11 @@ const submit = (user) => {
                 </Link>
                 <Link :href="route('users.create')">
                     <PrimaryButton class="my-2 mx-1">Create User</PrimaryButton>
+                </Link>
+                <Link :href="route('users.deleteMultiple')">
+                    <DangerButton class="my-2 mx-1"
+                        >Delete-Multiple-Users</DangerButton
+                    >
                 </Link>
 
                 <div>

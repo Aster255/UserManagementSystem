@@ -5,7 +5,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
-
+import DangerButton from "@/Components/DangerButton.vue";
 const form = useForm({
     first_name: "",
     last_name: "",
@@ -41,6 +41,11 @@ const submit = () => {
                 </Link>
                 <Link :href="route('users.create')">
                     <PrimaryButton class="my-2 mx-1">Create User</PrimaryButton>
+                </Link>
+                <Link :href="route('users.deleteMultiple')">
+                    <DangerButton class="my-2 mx-1"
+                        >Delete-Multiple-Users</DangerButton
+                    >
                 </Link>
 
                 <form @submit.prevent="submit">

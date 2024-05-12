@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import UserRow from "./Partials/UserRow.vue";
 import Pagination from "@/Components/Pagination.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 import { Head } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 defineProps({
@@ -29,6 +30,11 @@ defineProps({
                 </Link>
                 <Link :href="route('users.create')">
                     <PrimaryButton class="my-2 mx-1">Create User</PrimaryButton>
+                </Link>
+                <Link :href="route('users.deleteMultiple')">
+                    <DangerButton class="my-2 mx-1"
+                        >Delete-Multiple-Users</DangerButton
+                    >
                 </Link>
                 <table class="min-w-full leading-normal">
                     <thead>

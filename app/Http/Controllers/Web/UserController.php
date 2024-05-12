@@ -108,4 +108,45 @@ class UserController extends Controller
         $user->delete();
         return redirect(route('users.index'));
     }
+
+    public function deleteMultiple()
+    {
+        return Inertia::render('User/DeleteMultiple');
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+
+        $request->validate([
+            'password' => ['required', 'current_password'],
+            'user_ids' => ['array']
+        ]);
+
+        $userIds = $request->input('user_ids', []);
+
+        $deletedIds = [];
+        $notFoundIds = [];
+        foreach ($userIds as $userId) {
+            try {
+                $user = User::findOrFail($userId);
+                $user->tokens()->delete();
+                $user->delete();
+                $deletedIds[] = $userId;
+            } catch (ModelNotFoundException $e) {
+                $notFoundIds[] = $userId;
+            }
+        }
+
+        $response = [
+            'success' => [
+                'deleted_ids' => $deletedIds
+            ],
+            'errors' => [
+                'not_found_ids' => $notFoundIds
+            ]
+        ];
+
+        return response()->json($response, 200);
+    }
+
 }
