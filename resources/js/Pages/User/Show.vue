@@ -47,6 +47,11 @@ defineProps({
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <Link :href="route('users.edit', { user_id: user.id })">
+                        <PrimaryButton class="my-2">Edit</PrimaryButton>
+                    </Link>
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>

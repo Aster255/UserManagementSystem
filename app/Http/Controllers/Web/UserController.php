@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -54,5 +55,37 @@ class UserController extends Controller
         return Inertia::render('User/Show', ['user' => $user]);
     }
 
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return Inertia::render('User/Edit', ['user' => $user]);
+    }
 
+    public function update(EditUserRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $data = $this->fillMissingData($request->validated(), $user);
+        $user->update($data);
+
+        return redirect(route('users.show', ['user_id' => $id]), );
+    }
+
+    private function fillMissingData($data, $user)
+    {
+        $fields = [
+            'first_name',
+            'last_name',
+            'address',
+            'postal_code',
+            'phone_number',
+            'username',
+            'email',
+        ];
+        foreach ($fields as $field) {
+            if (empty($data[$field])) {
+                $data[$field] = $user->{$field};
+            }
+        }
+        return $data;
+    }
 }

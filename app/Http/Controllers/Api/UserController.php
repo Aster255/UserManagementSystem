@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -55,15 +56,35 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
         try {
             $user = User::findOrFail($id);
-            $user->update($request->all());
+            $data = $this->fillMissingData($request->validated(), $user);
+            $user->update($data);
             return new UserResource($user);
         } catch (ModelNotFoundException $e) {
             return $this->error(null, 'User not found', 404);
         }
+    }
+
+    private function fillMissingData($data, $user)
+    {
+        $fields = [
+            'first_name',
+            'last_name',
+            'address',
+            'postal_code',
+            'phone_number',
+            'username',
+            'email',
+        ];
+        foreach ($fields as $field) {
+            if (empty($data[$field])) {
+                $data[$field] = $user->{$field};
+            }
+        }
+        return $data;
     }
 
     /**

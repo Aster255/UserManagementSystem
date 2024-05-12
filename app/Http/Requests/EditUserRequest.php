@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rules;
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\User;
+use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class EditUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,24 +23,23 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
             'postal_code' => [
-                'required',
+                'nullable',
                 'string',
                 'max:255',
                 'regex:/\d{5}$|\d{4}$/',
             ],
             'phone_number' => [
-                'required',
+                'nullable',
                 'string',
                 'max:255',
                 'regex:/^09\d{9}$|^9\d{9}$/',
             ],
-            'username' => 'required|string|max:255|unique:' . User::class,
-            'email' => 'required|string|email|max:255|unique:' . User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'username' => 'nullable|string|max:255|unique:' . User::class,
+            'email' => 'nullable|string|email|max:255|unique:' . User::class,
         ];
     }
 }
