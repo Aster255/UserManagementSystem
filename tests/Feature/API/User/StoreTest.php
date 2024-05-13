@@ -56,7 +56,7 @@ class StoreTest extends TestCase
             'Accept' => 'application/json',
         ])->post('/api/users', $userData);
 
-        $response->assert(401);
+        $response->assertStatus(401);
     }
 
 

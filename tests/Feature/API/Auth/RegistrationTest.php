@@ -18,8 +18,8 @@ class RegistrationTest extends TestCase
             'address' => "address",
             'postal_code' => "11165",
             'phone_number' => "09173885123",
-            'username' => "testusernamex",
-            'email' => "g@test.com",
+            'username' => fake()->userName,
+            'email' => fake()->email,
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
