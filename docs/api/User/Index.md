@@ -3,9 +3,6 @@
 **Overview:**
 Gets a list of Users of the app, with pagination data.
 
-**Usage:**
-Gets a list of Users of the app
-
 **Routing:**
 
 -GET Route: /api/users?page={page}

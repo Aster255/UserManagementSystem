@@ -3,14 +3,9 @@
 **Overview:**
 The Login API allows developers to get a new personal_access_tokens revokes old tokens.
 
-**Usage:**
-
-Use to get user's own data or get a new personal access token.
-
 **Routing:**
 
 -POST Route: /api/login
--Description: Authenticates user credentials and sends back the token.
 
 **Body form-data**
 "email": "(String, required): The user's email address",

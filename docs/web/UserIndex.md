@@ -1,4 +1,4 @@
-## Feature Name: Users View Page
+## Feature Name: Users Index Page
 
 **Overview:**
 The User Index Page feature provides a list of users registered in the application.

@@ -3,14 +3,9 @@
 **Overview:**
 The Login API allows developers to create account and get personal_access_tokens.
 
-**Usage:**
-
-Use to create an account and get a personal access token.
-
 **Routing:**
 
 -POST Route: /api/register
--Description: Authenticates user credentials and sends back the token.
 
 **Body form-data**
 "first_name": "(string, required, max_length:255):User's first name",
