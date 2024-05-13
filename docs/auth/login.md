@@ -17,12 +17,16 @@ The Login Page feature allows users to sign in to the application.
 
 **Routing:**
 
--   Route: /
--   Route: /login
+-   GET Route: /
+    -Description: Displays the login page.
+-   GET Route: /login
+    -Description: Displays the login page.
+-   POST Route: /login
+    -Description: Authenticates user credentials and logs in the user.
 
 **Parameter**
 
-```json
+```POST Route: /login
 {
     "email": "(String, required): The user's email address",
     "password": "(String, required): The user's password"

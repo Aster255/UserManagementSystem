@@ -1,28 +1,29 @@
-## Feature Name: Registration Page
+## Feature Name: Create User Page
 
 **Overview:**
-The Registration Page feature allows users to create a new account on the application.
+The Create User Page feature allows users to create new user accounts.
 
 **Usage:**
 
-1. Fill out the registration form with the required information.
-2. Click the "Register" button to create your account.
-3. Upon successful registration, you will be redirected to the Users index page.
+1. Navigate to the Create User Page.
+2. Fill out the user creation form with the required information.
+3. Submit the form to create a new user account.
+4. Redirects to the User View Page upon successful acccount creation.
 
 **Pages:**
 
--resources\js\Pages\Auth\Register.vue: Renders the registration page.
+-resources\js\Pages\User\Create.vue: Users Create Page.
 
 **Routing:**
 
--   GET Route: /register
-    -Description: Displays the register page.
--   POST Route: /register
-    -Description: Authenticates user credentials and registers the user.
+-   GET Route: /users/create
+    -Description: Displays the create user page.
+-   POST Route: /users
+    -Description: Authenticates form credentials and creates the user.
 
 **Parameter**
 
-```POST Route: /login
+```POST Route: /users
 {
     "first_name": "(string, required, max_length:255):User's first name",
     "last_name": "(string, required, max_length:255):User's last name",
