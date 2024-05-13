@@ -35,7 +35,7 @@ class UserController extends Controller
     {
         $request->validated($request->all());
 
-        User::create([
+        $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'address' => $request->address,
@@ -46,7 +46,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect(route('users.index'));
+        return redirect(route('users.show', ['user_id' => $user->id]), );
     }
 
     public function show($id)

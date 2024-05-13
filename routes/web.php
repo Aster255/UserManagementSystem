@@ -22,11 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::get('/users/delete-multiple', [UserController::class, 'deleteMultiple'])->name('users.deleteMultiple');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{user_id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users/{user_id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::patch('/users/{user_id}', [UserController::class, 'update'])->name('users.update');
     Route::get('/users/{user_id}/delete', [UserController::class, 'delete'])->name('users.delete');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::patch('/users/{user_id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user_id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('/users/destroy-multiple', [UserController::class, 'destroyMultiple'])->name('users.destroyMultiple');
 
