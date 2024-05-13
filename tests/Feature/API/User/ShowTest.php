@@ -5,12 +5,12 @@ namespace Tests\Feature\API\User;
 use Tests\TestCase;
 use App\Models\User;
 
-class IndexTest extends TestCase
+class ShowTest extends TestCase
 {
-    /**
+    /**  
      * 
      */
-    public function test_user_index_successful(): void
+    public function test_user_show_successful(): void
     {
         $user = User::factory()->create();
 
@@ -19,18 +19,18 @@ class IndexTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
             'Accept' => 'application/json',
-        ])->get('/api/users');
+        ])->get('/api/users/' . $user->id);
 
         $response->assertStatus(200);
     }
 
-    public function test_user_index_unauthorized(): void
+    public function test_user_show_unauthorized(): void
     {
         $user = User::factory()->create();
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-        ])->get('/api/users');
+        ])->get('/api/users/' . $user->id);
 
         $response->assertStatus(401);
     }
