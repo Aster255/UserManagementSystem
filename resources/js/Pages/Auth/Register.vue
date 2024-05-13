@@ -93,6 +93,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="postal-code"
+                    placeholder="12345"
                 />
                 <InputError class="mt-2" :message="form.errors.postal_code" />
             </div>
@@ -107,6 +108,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="tel-national"
+                    placeholder="09123456789"
                 />
                 <InputError class="mt-2" :message="form.errors.phone_number" />
             </div>
